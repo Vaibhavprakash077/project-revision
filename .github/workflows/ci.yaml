@@ -52,7 +52,6 @@ jobs:
     steps:
       - name:  checkout ls -la
         run: ls -la 
-        if: failure()
-        run: ls -la
+     
   
         

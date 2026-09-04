@@ -13,20 +13,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: checkout repository
         uses: actions/checkout@v4
+  lint:
+    runs-on: ubuntu-latest
+    steps:
       - name: Python version
         run: python --version
-      - name: operating system
-        run: uname -i 
-      - name: current user
-        run: whoami 
-      - name: working directory
-        run: pwd
-      - name: list the repository files
-        run: ls -la
-
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: working dir
+        run: pwd 
+  
+        

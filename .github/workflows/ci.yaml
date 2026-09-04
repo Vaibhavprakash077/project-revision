@@ -1,5 +1,9 @@
 name: Python-CI
 
+
+env:
+  APP_USER: production
+
 on:
   push:
     branches:
@@ -14,10 +18,16 @@ on:
 
 jobs:
   test:
+    env:
+      APP_USER: testing
     runs-on: ubuntu-latest
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
+      - name: environment variable check
+        run: echo "$APP_USER"
+      - name: step variable
+        run: echo "$APP_USER"
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -41,6 +51,8 @@ jobs:
 
     steps:
       - name:  checkout ls -la
+        run: ls -la 
+        if: failure()
         run: ls -la
   
         

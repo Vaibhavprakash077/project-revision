@@ -34,6 +34,13 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-      
+  failure-handler:
+    runs-on: ubuntu-latest
+    needs: [lint,security,test]
+    if: failure()
+
+    steps:
+      - name:  checkout ls -la
+        uses: ls -la
   
         

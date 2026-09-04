@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: printing env vari
-        run: echo "$APP_ENV"
+        run: echo "$APP_USER"
   build:
     runs-on: ubuntu-latest
     needs: [lint,security,test]

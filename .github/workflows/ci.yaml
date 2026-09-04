@@ -20,7 +20,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Python version
-        run: python --verison
+        run: python --version
       - name: operating system
         run: uname -i 
       - name: current user
@@ -30,4 +30,3 @@ jobs:
       - name: list the repository files
         run: ls -la
 
-        

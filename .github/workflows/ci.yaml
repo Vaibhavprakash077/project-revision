@@ -26,8 +26,8 @@ jobs:
   security:
     runs-on: ubuntu-latest
     steps:
-      - name: working dir
-        run: pwd 
+      - name: cat docs
+        run: cat docs.txt
   build:
     runs-on: ubuntu-latest
     needs: [lint,security,test]

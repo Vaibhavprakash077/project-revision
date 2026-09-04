@@ -41,6 +41,9 @@ jobs:
 
     steps:
       - name:  checkout ls -la
+        uses: ls -la
+      - name: failure step
+        if: failure()
         run: ls -la
   
         

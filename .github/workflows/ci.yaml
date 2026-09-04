@@ -41,6 +41,6 @@ jobs:
 
     steps:
       - name:  checkout ls -la
-        uses: ls -la
+        run: ls -la
   
         

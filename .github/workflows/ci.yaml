@@ -28,5 +28,12 @@ jobs:
     steps:
       - name: working dir
         run: pwd 
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint,security,test]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      
   
         

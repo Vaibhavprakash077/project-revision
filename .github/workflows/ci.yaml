@@ -1,0 +1,32 @@
+name: Python-CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**.py"
+  pull_request:
+    branches:
+      - main
+  
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Python version
+        run: python --version
+      - name: operating system
+        run: uname -i 
+      - name: current user
+        run: whoami 
+      - name: working directory
+        run: pwd
+      - name: list the repository files
+        run: ls -la
+

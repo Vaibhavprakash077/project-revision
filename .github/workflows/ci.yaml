@@ -34,9 +34,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: GITHUB SHA
-        run: echo ${{GITHUB_SHA}}
+        run: echo "$GITHUB_SHA"
       - name: GITHUB REF
-        run: echo ${{GITHUB_REF}}
+        run: echo "$GITHUB_REF"
   security:
     runs-on: ubuntu-latest
     steps:

@@ -1,6 +1,7 @@
 name: Python-CI
 
-
+permissions:
+  contents: read
 env:
   APP_USER: production
 

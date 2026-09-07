@@ -1,7 +1,7 @@
 name: Python-CI
 
 permissions:
-  contents: write
+  contents: read
 env:
   APP_USER: production
 
@@ -21,12 +21,18 @@ jobs:
   test:
     env:
       APP_USER: testing
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest   
     permissions:
       contents: read
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
+      - name: Python SETUP
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Python version
+        run: python --version
       - name: environment variable check
         env:
           APP_USER: step variable

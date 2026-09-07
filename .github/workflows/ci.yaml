@@ -37,7 +37,6 @@ jobs:
         run: echo $GITHUB_SHA
       - name: GITHUB REF
         run: echo $GITHUB_REF
-
   security:
     runs-on: ubuntu-latest
     steps:

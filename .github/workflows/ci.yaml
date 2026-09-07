@@ -59,6 +59,7 @@ jobs:
   failure-handler:
     runs-on: ubuntu-latest
     needs: [lint,security,test]
+    if: failure()
     steps:
       - name:  checkout ls -la
         run: ls -la 

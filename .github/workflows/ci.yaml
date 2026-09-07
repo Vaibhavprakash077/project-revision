@@ -37,6 +37,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: LINTING
         run: ruff check .
+      - name: TESTING
+        run: pytest
       - name: environment variable check
         env:
           APP_USER: step variable

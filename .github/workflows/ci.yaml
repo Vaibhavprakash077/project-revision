@@ -34,9 +34,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: GITHUB SHA
-        run: echo "$GITHUB_SHA"
+        run: echo "$GITHb_mon
       - name: GITHUB REF
         run: echo "$GITHUB_REF"
+      - name: failure step
+        if: failure()
+        run: echo "FAILED STEPS"
   security:
     runs-on: ubuntu-latest
     steps:

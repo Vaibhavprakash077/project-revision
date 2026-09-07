@@ -33,12 +33,15 @@ jobs:
           python-version: '3.12'
       - name: Python version
         run: python --version
+      - name: installing dependencies
+        run: pip install -r requirements.txt
       - name: environment variable check
         env:
           APP_USER: step variable
         run: echo "$APP_USER"
       - name: step variable
         run: echo "$APP_USER"
+      
   lint:
     runs-on: ubuntu-latest
     permissions: {}

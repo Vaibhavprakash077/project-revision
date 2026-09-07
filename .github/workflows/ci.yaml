@@ -48,6 +48,8 @@ jobs:
         run: echo $GITHUB_TOKEN
   security:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - name: printing env vari
         run: echo "$APP_USER"

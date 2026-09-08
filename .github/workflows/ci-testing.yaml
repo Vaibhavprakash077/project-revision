@@ -42,7 +42,7 @@ jobs:
       - name: Downloading artifact
         uses: actions/download-artifact@v5
         with:
-          name: python-results
+          name: pytest-results
       - name: inspecting artifact
         run: cat test-results.xml
   

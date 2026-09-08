@@ -1,0 +1,51 @@
+name: Python-CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**.py"
+  pull_request:
+    branches:
+      - main
+  
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Installing dependencies
+        run: pip install -r requirements.txt
+      - name: LINTING
+        run: ruff check .
+      - name: TESTING
+        env:
+          PYTHON_PATH: .
+        run: python --junitxml=test-results.xml
+      - name: uploading artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-results
+          path: test-results.xml
+  artifact-check:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Downloading artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: python-results
+      - name: inspecting artifact
+        run: cat test-results.xml
+  
+        
+
+        

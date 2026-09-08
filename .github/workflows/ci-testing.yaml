@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - feature
-    paths:
-      - "ci-testing.yaml"
   pull_request:
     branches:
       - main

@@ -3,9 +3,9 @@ name: CI-TESTING
 on:
   push:
     branches:
-      - main
+      - feature
     paths:
-      - "**.py"
+      - "ci-testing.yaml"
   pull_request:
     branches:
       - main

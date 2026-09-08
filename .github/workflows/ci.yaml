@@ -101,7 +101,7 @@ jobs:
         with:
           name: pytest-results
       - name: Inspecting artifact
-        uses: cat pytest-results
+        run: cat pytest-results
 
      
   

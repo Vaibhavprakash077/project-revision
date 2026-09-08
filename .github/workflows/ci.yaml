@@ -101,7 +101,7 @@ jobs:
         with:
           name: pytest-results
       - name: Inspecting artifact
-        run: cat pytest-results
+        run: cat test-results.xml
 
      
   

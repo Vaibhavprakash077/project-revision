@@ -92,6 +92,17 @@ jobs:
     steps:
       - name:  checkout ls -la
         run: ls -la 
+  artifact-check:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Downloading artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: pytest-results
+      - name: Inspecting artifact
+        uses: cat pytest-results
+
      
   
         

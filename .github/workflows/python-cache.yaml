@@ -18,6 +18,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: "pip"
+          cache-dependency-path: requirements.txt
       - name: installing requirements
         run: pip install -r requirements.txt
       - name: Show pip cache info
@@ -27,4 +28,4 @@ jobs:
           echo "Pip cache list:"
           pip cache list
         
-#HI
+#HIgi

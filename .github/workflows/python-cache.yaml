@@ -1,0 +1,29 @@
+name: python-cache
+
+on:
+  push:
+    branches:
+      - feature
+  workflow_dispatch:
+
+jobs:
+  JOB-A:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: SETUP PYTHON
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - name: installing requirements
+        run: pip install -r requirements.txt
+      - name: Show pip cache info
+        run: |
+          echo "Pip cache directory:"
+          pip cache dir
+          echo "Pip cache list:"
+          pip cache list
+        

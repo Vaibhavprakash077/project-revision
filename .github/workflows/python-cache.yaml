@@ -24,8 +24,7 @@ jobs:
           key: linux-demo-v3
           restore-keys: linux-demo-
       - name: hitting
-        if: ${{steps.cache.outputs.cache-hit}} == 'true'
-        run: cat cache-data/message.txt
+        run: echo "cache-hit = '${{ steps.cache.outputs.cache-hit }}'"
       - name: content
         run: cat cache-data/message.txt
       

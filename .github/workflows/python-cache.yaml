@@ -19,15 +19,15 @@ jobs:
         uses: actions/cache@v6
         id: cache
         with:
-          path: cache-data
-          #key: ${{runner.os}}-${{hashFiles('requirements.txt')}}
-          key: linux-demo-v4
+          path: ~/.cache/pip
+          key: ${{runner.os}}-${{hashFiles('requirements.txt')}}
+          
           restore-keys: |
-           linux-demo-v2
-           linux-demo-
-           linux-
+            ${{runner.os}}-
       - name: hitting
         run: echo "cache-hit = '${{ steps.cache.outputs.cache-hit }}'"
-      - name: content
-        run: cat cache-data/message.txt
+      - name: installing dependencies
+        run: pip install -r requirements.txt
+      - name: cache info
+        run: ls -la ~/.cache/pip
       

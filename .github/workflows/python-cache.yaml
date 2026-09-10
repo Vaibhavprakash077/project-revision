@@ -23,13 +23,8 @@ jobs:
           #key: ${{runner.os}}-${{hashFiles('requirements.txt')}}
           key: linux-demo-v3
           restore-keys: linux-demo-
-      - name: creating dir
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          mkdir cache-data
-          echo "HELLO CACHE"> cache-data/message.txt
-      - name: cache hit
-        if: steps.cache.outputs.cache-hit == 'true'
+      - name: hitting
+        if: ${{steps.cache.outputs.cache-hit}} == 'true'
         run: cat cache-data/message.txt
       - name: content
         run: cat cache-data/message.txt

@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - feature
+    paths:
+        - "python-cache.yaml"
   workflow_dispatch:
 
 jobs:
@@ -18,7 +20,7 @@ jobs:
         id: cache
         with:
           path: cache-data
-          key: linux-demo-cache-v2
+          key: ${{runner.os}}-${{hashFiles('requirements.txt')}}
       - name: creating dir
         if: steps.cache.outputs.cache-hit != 'true'
         run: |

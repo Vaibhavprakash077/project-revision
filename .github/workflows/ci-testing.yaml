@@ -5,7 +5,7 @@ on:
     branches:
       - feature
     paths:
-        - "**.yaml"
+        - "ci-testing.yaml"
   pull_request:
     branches:
       - main

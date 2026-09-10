@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - feature
-    paths:
-        - ".github/workflows/python-cache.yaml"
   workflow_dispatch:
 
 jobs:

@@ -13,19 +13,20 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-      - name: SETUP PYTHON
-        uses: actions/setup-python@v7
+      - name: cache
+        uses: actions/cache@v6
+        id: cache
         with:
-          python-version: "3.12"
-          cache: "pip"
-          cache-dependency-path: requirements.txt
-      - name: installing requirements
-        run: pip install -r requirements.txt
-      - name: Show pip cache info
+          path: cache-data
+          key: linux-demo-cache
+      - name: creating dir
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          echo "Pip cache directory:"
-          pip cache dir
-          echo "Pip cache list:"
-          pip cache list
-        
-#HIgi
+          mkdir cache-data
+          echo "HELLO CACHE"> cache-data/message.txt
+      - name: cache hit
+        if: steps.cache.outputs.cache-hit == true
+        run: cat cache-data/message.txt
+      - name: content
+        run: cat cache-data/message.txt
+      

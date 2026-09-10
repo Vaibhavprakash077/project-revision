@@ -21,7 +21,8 @@ jobs:
         with:
           path: cache-data
           #key: ${{runner.os}}-${{hashFiles('requirements.txt')}}
-          key: linux-demo-v1
+          key: linux-demo-v2
+          restore-key: linux-demo-
       - name: creating dir
         if: steps.cache.outputs.cache-hit != 'true'
         run: |

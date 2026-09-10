@@ -5,7 +5,7 @@ on:
     branches:
       - feature
     paths:
-        - "python-cache.yaml"
+        - ".github/workflows/python-cache.yaml"
   workflow_dispatch:
 
 jobs:

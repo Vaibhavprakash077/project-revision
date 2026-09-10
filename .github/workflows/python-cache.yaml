@@ -21,8 +21,11 @@ jobs:
         with:
           path: cache-data
           #key: ${{runner.os}}-${{hashFiles('requirements.txt')}}
-          key: linux-demo-v3
-          restore-keys: linux-demo-
+          key: linux-demo-v4
+          restore-keys: |
+           linux-demo-v2
+           linux-demo-
+           linux-
       - name: hitting
         run: echo "cache-hit = '${{ steps.cache.outputs.cache-hit }}'"
       - name: content

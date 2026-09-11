@@ -92,6 +92,11 @@ jobs:
         run: docker build -t flask-app:$GITHUB_SHA .
       - name: starting container
         run: docker run -d --name CICD -p 8000:8000 flask-app:$GITHUB_SHA
+      - name: HTTP SMOKE TEST
+        run: |
+          response=$(curl --fail --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8000)
+          echo "$response"
+          echo "$response" | grep -q "Hello from Docker!"
   failure-handler:
     runs-on: ubuntu-latest
     needs: [lint,security,test]

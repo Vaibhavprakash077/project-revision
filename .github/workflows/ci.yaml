@@ -9,8 +9,12 @@ on:
   push:
     branches:
       - main
+      - feature
     paths:
       - "**.py"
+      - "ci.yaml"
+    
+
   pull_request:
     branches:
       - main

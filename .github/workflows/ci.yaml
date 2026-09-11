@@ -40,7 +40,7 @@ jobs:
       - name: installing dependencies
         run: pip install -r requirements.txt
       - name: LINTING
-        run: ruff check .a
+        run: ruff check .
       - name: TESTING
         env:
           PYTHONPATH: .

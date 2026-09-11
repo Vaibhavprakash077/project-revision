@@ -145,6 +145,8 @@ jobs:
     steps:
       - name: checking aws
         run: aws sts get-caller-identity
+      - name: listing buckets
+        run: aws s3 ls
 
 
      

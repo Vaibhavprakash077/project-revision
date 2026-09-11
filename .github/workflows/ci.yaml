@@ -84,6 +84,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+      - name: building image
+        run: docker build -t flask-app:$GITHUB_SHA .
   failure-handler:
     runs-on: ubuntu-latest
     needs: [lint,security,test]

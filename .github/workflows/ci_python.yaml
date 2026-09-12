@@ -35,7 +35,7 @@ jobs:
        with:
          python-version: "3.12"
          cache: "pip"
-         cache_dependance_path: requirements.txt
+         cache-dependancy-path: requirements.txt
      - name: dowloading dependancy
        run: pip install -r requirements.txt
      - name: Linting
@@ -69,7 +69,7 @@ jobs:
 
             if [ "$response" = "200" ] && grep -q "Hello from Docker!" body.txt; then
               echo "✅ Application is reachable and responded correctly"
-              docker rm -f smoke-test
+              docker rm -f ci_python
               exit 0
             fi
 
@@ -77,15 +77,15 @@ jobs:
           done
 
           echo "❌ Application did not become ready"
-          docker logs smoke-test
-          docker rm -f smoke-test
+          docker logs ci_python
+          docker rm -f ci_python
           exit 1
      - name: container state
        if: failure()
        run: docker ps -a
      - name: docker logs
        if: failure()
-       run: docker logs flask-app:$GITHUB_SHA
+       run: docker logs ci_python
      
 
   aws:

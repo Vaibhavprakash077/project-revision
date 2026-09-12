@@ -36,6 +36,8 @@ jobs:
          python-version: "3.12"
          cache: "pip"
          cache_dependance_path: requirements.txt
+     - name: dowloading dependancy
+       run: pip install -r requirements.txt
      - name: Linting
        run: ruff check .
      - name: testing

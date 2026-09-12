@@ -56,7 +56,7 @@ jobs:
      contents: read
    steps:
      - name: checkout repo
-       run: actions/checkout@v4
+       uses: actions/checkout@v4
      - name: docker build
        run: docker build -t flask-app:$GITHUB_SHA .
      - name: container start

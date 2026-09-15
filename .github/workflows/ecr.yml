@@ -81,7 +81,6 @@ jobs:
       - name: Build image for ECR
         env: 
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-
         run: docker build -t $REGISTRY/flask-app:${{github.sha}} .
       - name: Push image for ECR
         env:
@@ -95,3 +94,4 @@ jobs:
             --repository-name ${{ env.ECR_REPOSITORY }} \
             --image-ids imageTag=${IMAGE_TAG} \
             --region ${{ env.AWS_REGION }}
+#hu

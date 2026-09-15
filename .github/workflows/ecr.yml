@@ -54,7 +54,7 @@ jobs:
       - name: Run Trivy vulnerability scan
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: flask-app:$${{github.sha}}
+          image-ref: flask-app:${{github.sha}}
           format: table
           exit-code: "1"
           ignore-unfixed: true
@@ -82,7 +82,7 @@ jobs:
         env: 
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
 
-        run: docker build -t REGISTRY/flask-app:${{github.sha}}
+        run: docker build -t $REGISTRY/flask-app:${{github.sha}} .
       - name: Push image for ECR
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}

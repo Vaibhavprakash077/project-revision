@@ -54,7 +54,7 @@ jobs:
       - name: Run Trivy vulnerability scan
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          image-ref: flask-app:$GITHUB_SHA
+          image-ref: flask-app:$${{github.sha}}
           format: table
           exit-code: "1"
           ignore-unfixed: true

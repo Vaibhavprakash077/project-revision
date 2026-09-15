@@ -78,8 +78,12 @@ jobs:
       - name: Login to AMazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
-
       - name: Build image for ECR
+        env: 
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+
+        run: docker build -t REGISTRY/flask-app:${{github.sha}}
+      - name: Push image for ECR
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: docker push $REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA

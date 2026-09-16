@@ -1,6 +1,9 @@
 name: Phase 12 - SSM Test
 
 on:
+  push:
+    branches:
+      - feature
   workflow_dispatch:
 
 permissions:

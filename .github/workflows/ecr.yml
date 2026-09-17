@@ -121,7 +121,7 @@ jobs:
         env:
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          SCRIPT_B64=$(base64 -w 0 scripts/deploy.sh)
+          SCRIPT_B64=$(base64 -w 0 scripts/prac.sh)
 
           COMMANDS=$(jq -n \
             --arg script "$SCRIPT_B64" \

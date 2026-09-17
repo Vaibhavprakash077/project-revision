@@ -1,11 +1,11 @@
 #!/bin/bash
 
-set -e
+set -e #THIS IS TO EXIT if any error happens
 
 NEW_IMAGE_TAG="$1"
 
 if [ -z "$NEW_IMAGE_TAG" ]; then
-    echo "ERROR: Image tag is required."
+    echo "ERROR: Image tag is required."  #CHECKING IF NEW_IMAGE_TAG IS EMPTY
     exit 1
 fi
 

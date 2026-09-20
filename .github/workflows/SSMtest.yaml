@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - feature
+    paths:
+      - "**.py"
   workflow_dispatch:
 
 permissions:

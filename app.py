@@ -5,11 +5,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "Hello from Docker v4!"
+    return "Hello from Docker v5!"
 
 @app.route("/health")
 def health():
-    return {"status": "unhealthy"}, 500
+    return {"status": "healthy"}, 200
 
 
 if __name__ == "__main__":

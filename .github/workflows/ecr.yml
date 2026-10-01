@@ -68,32 +68,39 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v6
-        with:
-          role-to-assume: arn:aws:iam::207224908189:role/GitHubActions-OIDC-Role
-          aws-region: us-east-1
-      - name: Verify aws identity
-        run: aws sts get-caller-identity
-      - name: Login to AMazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
-      - name: Build image for ECR
-        env: 
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        run: docker build -t $REGISTRY/flask-app:${{github.sha}} .
-      - name: Push image for ECR
-        env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        run: docker push $REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
-      - name: Verify image exists in ECR
-        env:
-           IMAGE_TAG: ${{ github.sha }}
+      - name: Debug GitHub OIDC context
         run: |
-          aws ecr describe-images \
-            --repository-name ${{ env.ECR_REPOSITORY }} \
-            --image-ids imageTag=${IMAGE_TAG} \
-            --region ${{ env.AWS_REGION }}
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Ref: $GITHUB_REF"
+          echo "Branch: $GITHUB_REF_NAME"
+          echo "Workflow: $GITHUB_WORKFLOW"
+          echo "Environment: $GITHUB_ENVIRONMENT"
+            - name: configure aws credentials
+              uses: aws-actions/configure-aws-credentials@v6
+              with:
+                role-to-assume: arn:aws:iam::207224908189:role/GitHubActions-OIDC-Role
+                aws-region: us-east-1
+            - name: Verify aws identity
+              run: aws sts get-caller-identity
+            - name: Login to AMazon ECR
+              id: login-ecr
+              uses: aws-actions/amazon-ecr-login@v2
+            - name: Build image for ECR
+              env: 
+                REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+              run: docker build -t $REGISTRY/flask-app:${{github.sha}} .
+            - name: Push image for ECR
+              env:
+                REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+              run: docker push $REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
+            - name: Verify image exists in ECR
+              env:
+                IMAGE_TAG: ${{ github.sha }}
+              run: |
+                aws ecr describe-images \
+                  --repository-name ${{ env.ECR_REPOSITORY }} \
+                  --image-ids imageTag=${IMAGE_TAG} \
+                  --region ${{ env.AWS_REGION }}
   deploy_staging:
     runs-on: ubuntu-latest
     name: Deploy to Staging

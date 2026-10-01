@@ -94,6 +94,62 @@ jobs:
             --repository-name ${{ env.ECR_REPOSITORY }} \
             --image-ids imageTag=${IMAGE_TAG} \
             --region ${{ env.AWS_REGION }}
+  deploy_staging:
+    runs-on: ubuntu-latest
+    name: Deploy to Staging
+    needs: push_to_ecr
+
+    environment:
+      name: staging
+    
+    permissions:
+      id-token: write
+      contents: read
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: arn:aws:iam::207224908189:role/GitHubActions-OIDC-Role
+          aws-region: ${{env.AWS_REGION}}
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity
+
+      - name: Show deployment information
+        run: |
+          echo "Deploying to STAGING"
+          echo "Image: $ECR_REPOSITORY:${GITHUB_SHA}"
+  deploy_production:
+      name: Deploy to Production
+      runs-on: ubuntu-latest
+      needs: deploy_staging
+
+      environment:
+        name: production
+
+      permissions:
+        contents: read
+        id-token: write
+
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+
+        - name: Configure AWS credentials
+          uses: aws-actions/configure-aws-credentials@v6
+          with:
+            role-to-assume: arn:aws:iam::207224908189:role/GitHubActions-OIDC-Role
+            aws-region: ${{ env.AWS_REGION }}
+
+        - name: Verify AWS identity
+          run: aws sts get-caller-identity
+
+        - name: Show deployment information
+          run: |
+            echo "Deploying to PRODUCTION"
+            echo "Image: $ECR_REPOSITORY:${GITHUB_SHA}"
   # deploy_to_ec2:
   #   name: Deploy to EC2
   #   runs-on: ubuntu-latest

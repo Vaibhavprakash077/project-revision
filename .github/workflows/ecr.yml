@@ -16,7 +16,7 @@ env:
 
 jobs:
   test:
-    uses: ./github/workflows/reusable-test.yaml    
+    uses: ./.github/workflows/reusable-test.yaml    
   build_and_scan:
     name: Docker build and trivy scan
     runs-on: ubuntu-latest

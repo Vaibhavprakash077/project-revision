@@ -75,10 +75,30 @@ jobs:
           echo "Branch: $GITHUB_REF_NAME"
           echo "Workflow: $GITHUB_WORKFLOW"
           echo "Environment: ${{ github.environment }}"
-      - name: Debug OIDC claims
-        uses: github/actions-oidc-debugger@main
-        with:
-          audience: sts.amazonaws.com
+      - name: Inspect OIDC claims
+        env:
+          AUDIENCE: sts.amazonaws.com
+        run: |
+          TOKEN_JSON=$(curl -s \
+            -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=$AUDIENCE")
+
+          ID_TOKEN=$(echo "$TOKEN_JSON" | jq -r '.value')
+
+          echo "$ID_TOKEN" |
+            cut -d '.' -f2 |
+            base64 -d 2>/dev/null |
+            jq '{
+              iss,
+              aud,
+              sub,
+              repository,
+              repository_owner,
+              repository_id,
+              repository_owner_id,
+              ref,
+              environment
+            }'
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:

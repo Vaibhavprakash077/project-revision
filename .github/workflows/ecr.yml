@@ -16,31 +16,7 @@ env:
 
 jobs:
   test:
-    name: Python Tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repositoru
-        uses: actions/checkout@v4
-      - name: setup python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-          cache: 'pip'
-          cache-dependency-path: requirements.txt
-      - name: Installing dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Testing
-        env: 
-          PYTHONPATH: .
-        run: pytest --junitxml=test.xml;
-      - name: uploading artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: aritifact-push
-          path: test.xml
+    uses: ./github/workflows/reusable-test.yaml    
   build_and_scan:
     name: Docker build and trivy scan
     runs-on: ubuntu-latest

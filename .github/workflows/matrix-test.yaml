@@ -1,6 +1,9 @@
 name: matrix-test
 
 on:
+  push:
+    branches:
+      - feature
   workflow_dispatch:
 
 jobs:

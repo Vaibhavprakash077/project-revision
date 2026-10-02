@@ -75,6 +75,10 @@ jobs:
           echo "Branch: $GITHUB_REF_NAME"
           echo "Workflow: $GITHUB_WORKFLOW"
           echo "Environment: ${{ github.environment }}"
+      - name: Debug OIDC claims
+        uses: github/actions-oidc-debugger@main
+        with:
+          audience: sts.amazonaws.com
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:

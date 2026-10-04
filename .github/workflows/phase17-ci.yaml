@@ -39,3 +39,12 @@ jobs:
         env:
           PYTHONPATH: .
         run: pytest -v
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: false
+          tags: phase17-flask:ci

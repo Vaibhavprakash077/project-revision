@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, jsonify
 
 app = Flask(__name__)
@@ -20,7 +22,7 @@ def health():
 @app.route("/version")
 def version():
     return jsonify({
-        "version": "local"
+        "version": os.getenv("GIT_SHA", "local")
     })
 
 

@@ -28,9 +28,9 @@ jobs:
         with:
           python-version: "3.14"
           cache: pip
-          cache-dependency-path: requirements.txt
+          cache-dependency-path: requirements-dev.txt
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r equirements-dev.txt
 
       - name: Run Ruff
         run: ruff check .

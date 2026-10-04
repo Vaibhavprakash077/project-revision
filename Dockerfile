@@ -2,6 +2,9 @@ FROM python:3.12-slim-bookworm
 
 WORKDIR /app
 
+ARG GIT_SHA=local
+ENV GIT_SHA=$GIT_SHA
+
 RUN apt-get update \
     && apt-get upgrade -y \
     && rm -rf /var/lib/apt/lists/*

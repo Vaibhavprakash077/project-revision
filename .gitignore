@@ -8,3 +8,6 @@ venv/
 
 # Logs
 *.log
+
+# Local virtual environment
+.venv/

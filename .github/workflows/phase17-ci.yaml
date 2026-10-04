@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   quality:
-    name: Lint and Test
+    name: Code, Build and Security
     runs-on: ubuntu-latest
 
     steps:
@@ -48,6 +48,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: .
+          push: false
           load: true
           tags: phase17-flask:ci
 
